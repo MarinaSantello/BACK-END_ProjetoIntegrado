@@ -4,8 +4,8 @@ const bodyParser = require('body-parser')
 
 const app = express()
 
-const { getCursos } = require('./modulos/cursos')
-const { getAlunosCurso, getAlunosAnoCurso, getDiciplinaAluno, getAlunos, getAlunosCursoStatus } = require('./modulos/funAlunos')
+const { getCursos } = require('../modulos/cursos')
+const { getAlunosCurso, getAlunosAnoCurso, getDiciplinaAluno, getAlunos, getAlunosCursoStatus } = require('../modulos/funAlunos')
 const { response, request } = require('express')
 
 app.use((request, response, next) => {
@@ -15,7 +15,7 @@ app.use((request, response, next) => {
     next()
 })
 
-app.get('/cursos', cors(), async(request, response, next) => {
+app.get('/.netlify/functions/api/cursos', cors(), async(request, response, next) => {
     let cursos = getCursos()
 
     if (cursos == null) {
@@ -27,7 +27,7 @@ app.get('/cursos', cors(), async(request, response, next) => {
     }
 })
 
-app.get('/alunos/', cors(), async(request, response, next) => {
+app.get('/.netlify/functions/api/alunos/', cors(), async(request, response, next) => {
     const sigla = request.query.filtroSigla
     let alunos = getAlunosCurso(sigla)
 
@@ -40,7 +40,7 @@ app.get('/alunos/', cors(), async(request, response, next) => {
     }
 })
 
-app.get('/alunosGeral/', cors(), async(request, response, next) => {
+app.get('/.netlify/functions/api/alunosGeral/', cors(), async(request, response, next) => {
     const sigla = request.query.filtroSigla
     const ano = request.query.anoConclusao
     const status = request.query.filtroStatus
@@ -55,7 +55,7 @@ app.get('/alunosGeral/', cors(), async(request, response, next) => {
     }
 })
 
-app.get('/alunosCursoStatus/', cors(), async(request, response, next) => {
+app.get('/.netlify/functions/api/alunosCursoStatus/', cors(), async(request, response, next) => {
     const sigla = request.query.filtroSigla
     const status = request.query.filtroStatus
     let alunos = getAlunosCursoStatus(sigla, status)
@@ -70,7 +70,7 @@ app.get('/alunosCursoStatus/', cors(), async(request, response, next) => {
 })
 
 
-app.get('/alunosConclusao/', cors(), async(request, response, next) => {
+app.get('/.netlify/functions/api/alunosConclusao/', cors(), async(request, response, next) => {
     const ano = request.query.filtroAno
     const curso = request.query.filtroCurso
     let alunos = getAlunosAnoCurso(ano, curso)
@@ -84,7 +84,7 @@ app.get('/alunosConclusao/', cors(), async(request, response, next) => {
     }
 })
 
-app.get('/diciplinaAluno', cors(), async(request, response, next) => {
+app.get('/.netlify/functions/api/diciplinaAluno', cors(), async(request, response, next) => {
     let matricula = request.query.filtro
     let informacoes = getDiciplinaAluno(matricula)
 
@@ -110,6 +110,8 @@ app.get('/diciplinaAluno', cors(), async(request, response, next) => {
 //     }
 // })
 
-app.listen(3030, () => {
-    console.log('Server waiting requisitions')
-})
+// app.listen(3030, () => {
+//     console.log('Server waiting requisitions')
+// })
+
+module.exports = app

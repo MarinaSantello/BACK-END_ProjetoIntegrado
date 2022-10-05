@@ -10,7 +10,7 @@ var cursos = [
         "nome2" :   "DS",
         "sigla" :   "DS",
         // "icone" :   "../imgs/vector-ds.svg",
-        "icone" :   "./FRONT-END/imgs/vector-ds.svg",
+        "icone" :   "./imgs/vector-ds.svg",
         "carga" :   "1200",
     },
     {
@@ -18,7 +18,7 @@ var cursos = [
         "nome2" :   "REDES",
         "sigla" :   "RDC",
         // "icone" :   "../imgs/vector-rdc.svg",
-        "icone" :   "./FRONT-END/imgs/vector-rdc.svg",
+        "icone" :   "./imgs/vector-rdc.svg",
         "carga" :   "1200"
     }
 ];
